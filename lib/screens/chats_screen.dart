@@ -1,15 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-const _accent = Color(0xFF25AFF4);
-const _cardBg = Color(0xFF1A282F);
-const _appBarBg = Color(0xFF101C22);
-
 class ChatsScreen extends StatelessWidget {
   const ChatsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
@@ -17,7 +16,8 @@ class ChatsScreen extends StatelessWidget {
           SliverAppBar(
             pinned: true,
             floating: true,
-            backgroundColor: _appBarBg.withValues(alpha: 0.8),
+            backgroundColor: (theme.appBarTheme.backgroundColor ?? colorScheme.surface)
+                .withValues(alpha: 0.8),
             flexibleSpace: ClipRect(
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -158,6 +158,9 @@ class _ChatTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = conversation;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -172,7 +175,7 @@ class _ChatTile extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 28,
-                    backgroundColor: _cardBg,
+                    backgroundColor: colorScheme.surfaceContainerHighest,
                     backgroundImage: NetworkImage(c.avatarUrl),
                   ),
                   if (c.isOnline)
@@ -216,7 +219,7 @@ class _ChatTile extends StatelessWidget {
                         Text(
                           c.time,
                           style: TextStyle(
-                            color: c.unread > 0 ? _accent : Colors.grey,
+                            color: c.unread > 0 ? colorScheme.secondary : Colors.grey,
                             fontSize: 12,
                             fontWeight: c.unread > 0 ? FontWeight.w600 : FontWeight.normal,
                           ),
@@ -242,7 +245,7 @@ class _ChatTile extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
-                              color: _accent,
+                              color: colorScheme.secondary,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(

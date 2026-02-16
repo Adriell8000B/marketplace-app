@@ -16,9 +16,11 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF162032),
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
       ),
       padding: const EdgeInsets.all(10),
@@ -57,8 +59,8 @@ class ProductCard extends StatelessWidget {
             children: [
               Text(
                 price,
-                style: const TextStyle(
-                  color: Color(0xFF25AFF4),
+                style: TextStyle(
+                  color: colorScheme.secondary,
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),

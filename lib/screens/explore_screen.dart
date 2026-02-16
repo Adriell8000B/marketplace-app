@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:marketplace/widgets/section_header.dart';
 import 'package:marketplace/widgets/product_card.dart';
 
-const _accent = Color(0xFF25AFF4);
-const _cardBg = Color(0xFF1A282F);
-
 class ExploreScreen extends StatelessWidget {
   const ExploreScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
@@ -18,7 +18,8 @@ class ExploreScreen extends StatelessWidget {
           SliverAppBar(
             pinned: true,
             floating: true,
-            backgroundColor: const Color(0xFF101C22).withValues(alpha: 0.8),
+            backgroundColor: (theme.appBarTheme.backgroundColor ?? colorScheme.surface)
+                .withValues(alpha: 0.8),
             flexibleSpace: ClipRect(
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -128,14 +129,17 @@ class _FilterChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Padding(
       padding: const EdgeInsets.only(right: 10),
       child: FilterChip(
         label: Text(label),
         selected: active,
         onSelected: (_) {},
-        backgroundColor: _cardBg,
-        selectedColor: _accent,
+        backgroundColor: colorScheme.surfaceContainerHighest,
+        selectedColor: colorScheme.secondary,
         labelStyle: TextStyle(
           color: active ? Colors.white : Colors.grey,
           fontWeight: FontWeight.w600,

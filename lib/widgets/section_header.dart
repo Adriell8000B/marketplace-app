@@ -12,6 +12,8 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Padding(
@@ -29,8 +31,8 @@ class SectionHeader extends StatelessWidget {
             ),
             Text(
               action,
-              style: const TextStyle(
-                color: Color(0xFF25AFF4),
+              style: TextStyle(
+                color: colorScheme.secondary,
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),

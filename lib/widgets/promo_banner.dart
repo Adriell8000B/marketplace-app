@@ -18,6 +18,8 @@ class PromoBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
@@ -46,8 +48,8 @@ class PromoBanner extends StatelessWidget {
             children: [
               Text(
                 badge,
-                style: const TextStyle(
-                  color: Color(0xFF25AFF4),
+                style: TextStyle(
+                  color: colorScheme.secondary,
                   fontWeight: FontWeight.bold,
                   fontSize: 12,
                 ),
@@ -64,7 +66,7 @@ class PromoBanner extends StatelessWidget {
               ElevatedButton(
                 onPressed: onPressed,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF25AFF4),
+                  backgroundColor: colorScheme.secondary,
                 ),
                 child: Text(
                   buttonLabel,

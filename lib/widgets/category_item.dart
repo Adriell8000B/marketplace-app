@@ -14,6 +14,8 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Padding(
       padding: const EdgeInsets.only(right: 20),
       child: Column(
@@ -22,7 +24,7 @@ class CategoryItem extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: active ? const Color(0xFF25AFF4) : const Color(0xFF1A282F),
+              color: active ? colorScheme.secondary : colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Icon(
@@ -35,7 +37,7 @@ class CategoryItem extends StatelessWidget {
             label,
             style: TextStyle(
               fontSize: 11,
-              color: active ? const Color(0xFF25AFF4) : Colors.grey,
+              color: active ? colorScheme.secondary : Colors.grey,
               fontWeight: FontWeight.bold,
             ),
           ),

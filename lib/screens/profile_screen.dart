@@ -1,15 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-const _accent = Color(0xFF25AFF4);
-const _cardBg = Color(0xFF1A282F);
-const _appBarBg = Color(0xFF101C22);
-
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
@@ -17,7 +16,8 @@ class ProfileScreen extends StatelessWidget {
           SliverAppBar(
             pinned: true,
             floating: true,
-            backgroundColor: _appBarBg.withValues(alpha: 0.8),
+            backgroundColor: (theme.appBarTheme.backgroundColor ?? colorScheme.surface)
+                .withValues(alpha: 0.8),
             flexibleSpace: ClipRect(
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -89,11 +89,14 @@ class ProfileScreen extends StatelessWidget {
 class _ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Row(
       children: [
         CircleAvatar(
           radius: 40,
-          backgroundColor: _cardBg,
+          backgroundColor: colorScheme.surface,
           backgroundImage: const NetworkImage("https://picsum.photos/200?random=profile"),
         ),
         const SizedBox(width: 20),
@@ -120,10 +123,13 @@ class _ProfileHeader extends StatelessWidget {
               const SizedBox(height: 8),
               TextButton.icon(
                 onPressed: () {},
-                icon: const Icon(Icons.edit_outlined, size: 16, color: _accent),
-                label: const Text(
+                icon: Icon(Icons.edit_outlined, size: 16, color: colorScheme.secondary),
+                label: Text(
                   "Edit profile",
-                  style: TextStyle(color: _accent, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                    color: colorScheme.secondary,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.zero,
@@ -142,10 +148,12 @@ class _ProfileHeader extends StatelessWidget {
 class _StatsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
-        color: _cardBg,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
@@ -212,6 +220,8 @@ class _ProfileSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -229,7 +239,7 @@ class _ProfileSection extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
-            color: _cardBg,
+            color: colorScheme.surface,
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(

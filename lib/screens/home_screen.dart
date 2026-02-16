@@ -11,6 +11,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
@@ -18,7 +21,8 @@ class HomeScreen extends StatelessWidget {
           SliverAppBar(
             pinned: true,
             floating: true,
-            backgroundColor: const Color(0xFF101C22).withValues(alpha: 0.8),
+            backgroundColor: (theme.appBarTheme.backgroundColor ?? colorScheme.surface)
+                .withValues(alpha: 0.8),
             flexibleSpace: ClipRect(
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
